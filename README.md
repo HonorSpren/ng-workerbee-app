@@ -91,3 +91,7 @@ testMessage: workerMessageFormat = BuildMessage(workerFunction, params, [valComp
     );
 ```
 
+### Demo
+To run the sample app, clone the github repo and run npm run build ng-workerbee && npm start
+
+#### WorkerHelper class sourced from https://github.com/angular/angular-cli/issues/15059#issuecomment-584593180 
