@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import * as utils from './index';
-
+import { workerMessageFormat } from './workerMessageFormat';
 //TODO: write better unit tests...
 
 describe('NgWorkerbeeService', () => {
@@ -9,7 +9,6 @@ describe('NgWorkerbeeService', () => {
   let InitWorker = utils.InitWorker;
   let PostToWorker = utils.PostToWorker;
   let WorkerHelper = utils.WorkerHelper;
-  let workerMessageFormat = utils.workerMessageFormat;
   let worker;
   let logTest = function (item): Promise<any> {
     return new Promise((resolve) => {

@@ -18,7 +18,6 @@ https://www.npmjs.com/package/ng-workerbee
 ```typescript
 import {
   InitWorker,
-  workerMessageFormat,
   PostToWorker,
   BuildMessage,
 } from 'ng-workerbee';
@@ -72,7 +71,7 @@ import {
   }
 }
 params = { logVal: 'workerbee works!' }
-testMessage: workerMessageFormat = BuildMessage(workerFunction, params, [valCompare])
+testMessage = BuildMessage(workerFunction, params, [valCompare])
 ```
 
 ### Use PostToWorker to invoke:
