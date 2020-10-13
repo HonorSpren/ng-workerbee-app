@@ -15,7 +15,7 @@ import { workerMessageFormat } from './workerMessageFormat';
  * @param {Function[]} depFuns
  * @return {*}  {workerMessageFormat}
  */
-export function BuildMessage( wFun: Function, params: any, depFuns: Function[] ): workerMessageFormat {
+export function BuildMessage( wFun: Function, params: any, depFuns: Function[] = [] ): workerMessageFormat {
     let msg: workerMessageFormat = {
         depFuns: depFuns,
         workerFunction: wFun,

@@ -55,8 +55,8 @@ import {
 // the first is the function your worker should execute, the workerFunction, which MUST reuturn a Promise.
 // this function should take one parameter, even should you decide that it is undefined.
 // the second is the parameter to be passed to the workerFunction
-// the third is an array of functions that the workerFunction is dependent on, 
-// if none, pass an empty array.
+// the third is an optional array of functions that the workerFunction is dependent on, 
+
   workerFunction(item): Promise<any> {
     return new Promise((resolve) => {
       if (valCompare(item)) {
@@ -95,4 +95,3 @@ testMessage: workerMessageFormat = BuildMessage(workerFunction, params, [valComp
 To run the sample app, clone the github repo and run npm run build ng-workerbee && npm start
 
 #### WorkerHelper class sourced from https://github.com/angular/angular-cli/issues/15059#issuecomment-584593180 
-
