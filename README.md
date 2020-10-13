@@ -46,7 +46,7 @@ import {
   }
   ```
   
-### Use BuildMessage to construct the second parameter for PostMessage like:
+### Use BuildMessage to construct the second parameter for PostToWorker like:
 ```typescript
 // BuildMessage takes 3 parameterslike:
 // BuildMessage( wFun: Function, params: any, depFuns: Function[] )
