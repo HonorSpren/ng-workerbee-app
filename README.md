@@ -1,27 +1,91 @@
-# NgWorkerbeeApp
+# Ng-Workerbee
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.8.
 
-## Development server
+## Why ng-workerbee?
+Angular 8 introduced native support for Web Workers, however this support does not extend to Angular libraries. 
+Ng-Workerbee makes use of the WorkerHelper class (written by klausj https://github.com/klausj and sourced from https://github.com/angular/angular-cli/issues/15059#issuecomment-584593180) to allow a developer to easily use Web Workers in a compiled Angular library. While developed specifically to support Web Workers in Angular libraries, ng-workerbee can be used in any Angular project.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Usage
 
-## Code scaffolding
+### Install
+clone this repo and build the ng-workerbee project.
+#### //TODO: publish to npmjs.org
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Imports
+```typescript
+import {
+  InitWorker,
+  workerMessageFormat,
+  PostToWorker,
+  BuildMessage,
+} from 'ng-workerbee';
+```
 
-## Build
+### Initialize your worker in a component constructor:
+```typescript
+  // InitWorker takes 2 parameters like:
+  // InitWorker(processResponse: Function, that?: any)
+  // your processResponse function should take 2 parameters
+  // someFunction(response: MessageResponse, that: Component)
+  // Passing an instance of your component to InitWorker
+  // is required if you wish your worker to "return" a value.
+  // It is suggested to use a Subject(BehaviorSubject or ReplaySubject) here.
+  data: MessageEvent;
+  dataSubject = new Subject<MessageEvent>();
+  testWorker: Worker;
+  workerTest = function (data, that) {
+    that.dataSubject.next(data)
+    console.log(`initWorker got message: ${data.data}`);
+  };
+  constructor() {
+    this.dataSubject.subscribe({
+      next: (d) => this.data = d
+    })
+    this.testWorker = InitWorker(this.workerTest, this);
+  }
+  ```
+  
+### Use BuildMessage to construct the second parameter for PostMessage like:
+```typescript
+// BuildMessage takes 3 parameterslike:
+// BuildMessage( wFun: Function, params: any, depFuns: Function[] )
+// the first is the function your worker should execute, the workerFunction, which MUST reuturn a Promise.
+// this function should take one parameter, even should you decide that it is undefined.
+// the second is the parameter to be passed to the workerFunction
+// the third is an array of functions that the workerFunction is dependent on, 
+// if none, pass an empty array.
+  workerFunction(item): Promise<any> {
+    return new Promise((resolve) => {
+      if (valCompare(item)) {
+        resolve('resolving with: ' + item.logVal);
+      }
+    });
+  }
+  valCompare(item): boolean {
+  if (item.logVal === 'workerbee works!') {
+    return true;
+  } else {
+    return false;
+  }
+}
+params = { logVal: 'workerbee works!' }
+testMessage: workerMessageFormat = BuildMessage(workerFunction, params, [valCompare])
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Use PostToWorker to invoke:
+```typescript
+// PostToWorker takes 2 parameters like:
+// PostToWorker(worker: Worker, message: workerMessageFormat)
+// the first is the worker to which the message should be posted
+// the second is a message of type {workerMessageFormat} (returned by BuildMessage)
+// When the worker completes, the function you provided to InitWorker will be
+// invoked with the resolution of your workerFunction and the Component instance 
+// you passed to InitWorker(if any).
+// DONE.
+    PostToWorker(
+      this.testWorker,
+      this.testMessage
+    );
+```
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
