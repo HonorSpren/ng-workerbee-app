@@ -55,6 +55,11 @@ import {
 // this function should take one parameter, even should you decide that it is undefined.
 // the second is the parameter to be passed to the workerFunction
 // the third is an optional array of functions that the workerFunction is dependent on, 
+// these dependency functions MUST be declared as exported functions like:
+// export function myFunction(){ doStuff... }
+// rather than as let myFun = function(){ doStuff... }
+// in order to maintain their function names within the scope of the worker
+
 
   workerFunction(item): Promise<any> {
     return new Promise((resolve) => {
