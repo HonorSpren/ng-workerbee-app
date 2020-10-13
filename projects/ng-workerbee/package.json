@@ -1,6 +1,6 @@
 {
   "name": "ng-workerbee",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Angular library Web Workers",
   "author": "Corbitt Eason",
   "license": "MIT",
