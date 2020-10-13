@@ -27,14 +27,14 @@ import {
   // InitWorker takes 2 parameters like:
   // InitWorker(processResponse: Function, that?: any)
   // your processResponse function should take 2 parameters
-  // someFunction(response: MessageResponse, that: Component)
+  // someFunction(response: MessageResponse, that: myComponent)
   // Passing an instance of your component to InitWorker
   // is required if you wish your worker to "return" a value.
   // It is suggested to use a Subject(BehaviorSubject or ReplaySubject) here.
   data: MessageEvent;
   dataSubject = new Subject<MessageEvent>();
   testWorker: Worker;
-  workerTest = function (data, that) {
+  workerTest = function (data: MessageEvent, that: myComponent) {
     that.dataSubject.next(data)
     console.log(`initWorker got message: ${data.data}`);
   };
