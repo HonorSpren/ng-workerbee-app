@@ -1,5 +1,5 @@
 // WorkerHelper written by https://github.com/klausj
-// sourced from https://github.com/angular/angular-cli/issues/15059
+// sourced from https://github.com/angular/angular-cli/issues/15059#issuecomment-584593180
 
 // Helper class to build Worker Object URL
 

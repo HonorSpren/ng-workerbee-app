@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { BuildWorkerFunction } from './buildWorkerFun';
 import { WorkerHelper } from './workerHelper';
 

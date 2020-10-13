@@ -5,6 +5,7 @@ import {
   PostToWorker,
   BuildMessage,
 } from 'ng-workerbee';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,21 +13,26 @@ import {
 })
 export class AppComponent {
   title = 'ng-workerbee-app';
-  testWorker;
   data: MessageEvent;
+  dataSubject = new Subject<MessageEvent>();
+  testWorker: Worker;
   constructor() {
+    this.dataSubject.subscribe({
+      next: (d) => this.data = d
+    })
     this.testWorker = InitWorker(this.logData, this);
   }
-  logData = function (data, that) {
-    that.data = data
+  logData = function (data: MessageEvent, that: AppComponent) {
+    that.dataSubject.next(data)
     console.log(`initWorker got message: ${data.data}`);
   };
   ngAfterContentInit() {
     PostToWorker(
       this.testWorker,
-      BuildMessage([valCompare], this.logTest, {
-        logVal: 'workerbee works!',
-      })
+      BuildMessage(this.logTest,
+        {logVal: 'workerbee works!'},
+        [valCompare]
+      )
     );
   }
 
@@ -38,7 +44,7 @@ export class AppComponent {
     });
   }
 }
-export function valCompare(item) {
+export function valCompare(item): boolean {
   if (item.logVal === 'workerbee works!') {
     return true;
   } else {

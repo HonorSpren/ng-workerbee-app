@@ -35,9 +35,10 @@ describe('NgWorkerbeeService', () => {
     worker = InitWorker(testValFunction);
     PostToWorker(
       worker,
-      BuildMessage([valCompare], logTest, {
-        logVal: 'workerbee works!',
-      })
+      BuildMessage( logTest, {
+        logVal: 'workerbee works!'
+      },
+      [valCompare])
     );
   });
 

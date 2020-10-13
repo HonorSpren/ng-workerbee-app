@@ -30,7 +30,7 @@ import { workerMessageFormat } from './workerMessageFormat';
  * @param {workerMessageFormat} message
  * @return {*}  {*}
  */
-export function PostToWorker(worker, message: workerMessageFormat): any {
+export function PostToWorker(worker: Worker, message: workerMessageFormat): any {
     let df = [];
     message.depFuns.forEach( fun=> {
         df.push('' + fun)
