@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-wb": "ng build ng-workerbee",
-    "publish-wb": "ng build ng-workerbee --prod && cd dist/ngworkerbee && npm publish"
+    "publish-wb": "ng build ng-workerbee --prod && cd dist/ng-workerbee && npm publish"
   },
   "private": true,
   "dependencies": {
