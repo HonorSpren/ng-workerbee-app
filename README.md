@@ -9,8 +9,10 @@ Ng-Workerbee makes use of the WorkerHelper class (written by klausj https://gith
 ## Usage
 
 ### Install
+npm i ng-workerbee
+-or-
 clone this repo and build the ng-workerbee project.
-#### //TODO: publish to npmjs.org
+https://www.npmjs.com/package/ng-workerbee
 
 ### Imports
 ```typescript
