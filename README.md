@@ -27,10 +27,13 @@ import {
 ```typescript
   // InitWorker takes 2 parameters like:
   // InitWorker(processResponse: Function, that?: any)
-  // your processResponse function should take 2 parameters
+  // 
+  // the first is a function which should take 2 parameters like:
   // someFunction(response: MessageResponse, that: myComponent)
-  // Passing an instance of your component to InitWorker
-  // is required if you wish your worker to "return" a value.
+  // 
+  // the second should be an object or an instance of
+  // your component if you wish your worker to "return" a value.
+  // 
   // It is suggested to use a Subject(BehaviorSubject or ReplaySubject) here.
   data: MessageEvent;
   dataSubject = new Subject<MessageEvent>();
@@ -51,11 +54,17 @@ import {
 ```typescript
 // BuildMessage takes 3 parameterslike:
 // BuildMessage( wFun: Function, params: any, depFuns: Function[] )
-// the first is the function your worker should execute, the workerFunction, which MUST reuturn a Promise.
-// this function should take one parameter, even should you decide that it is undefined.
+// 
+// the first is the function your worker should execute, the 
+// workerFunction, which MUST reuturn a Promise.
+// this function should take one parameter, even should you decide
+// that it is undefined.
+// 
 // the second is the parameter to be passed to the workerFunction
-// the third is an optional array of functions that the workerFunction is dependent on, 
-// these dependency functions MUST be declared as exported functions like:
+// 
+// the third is an optional array of functions that the workerFunction
+// is dependent on,  these dependency functions MUST be declared as
+// exported functions like:
 // export function myFunction(){ doStuff... }
 // rather than as let myFun = function(){ doStuff... }
 // in order to maintain their function names within the scope of the worker
@@ -83,8 +92,11 @@ testMessage = BuildMessage(workerFunction, params, [valCompare])
 ```typescript
 // PostToWorker takes 2 parameters like:
 // PostToWorker(worker: Worker, message: workerMessageFormat)
+// 
 // the first is the worker to which the message should be posted
-// the second is a message of type {workerMessageFormat} (returned by BuildMessage)
+// 
+// the second is a message of type {workerMessageFormat}
+// (returned by BuildMessage)
 // When the worker completes, the function you provided to InitWorker will be
 // invoked with the resolution of your workerFunction and the Component instance 
 // you passed to InitWorker(if any).
