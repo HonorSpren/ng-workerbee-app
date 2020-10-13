@@ -1,9 +1,24 @@
 {
   "name": "ng-workerbee",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "description": "Angular library Web Workers",
+  "author": "Corbitt Eason",
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^10.0.14",
     "@angular/core": "^10.0.14"
+  },
+  "keywords": [
+    "angular",
+    "Web Worker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HonorSpren/ng-workerbee-app"
+  },
+  "homepage": "https://github.com/HonorSpren/ng-workerbee-app/blob/master/README.md",
+  "bugs": {
+    "url": "https://github.com/HonorSpren/ng-workerbee-app/issues"
   },
   "dependencies": {
     "tslib": "^2.0.0"

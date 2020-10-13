@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-wb": "ng build ng-workerbee"
+    "build-wb": "ng build ng-workerbee",
+    "publish-wb": "ng build ng-workerbee --prod && cd dist-ngworkerbee && npm publish"
   },
   "private": true,
   "dependencies": {
